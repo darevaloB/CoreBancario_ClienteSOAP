@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://espe.edu.ec/arquisoft/cliente/ws" 
+           targetNamespace="http://espe.edu.ec/arquisoft/cliente/ws" elementFormDefault="qualified">
+    
+    <xs:element name="getClienteByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="getClienteByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>   
+
+    <xs:element name="getClienteRequest">
+        <xs:complexType>
+            <xs:sequence />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+ 
+
+    <xs:element name="createdClienteReturnIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="createdClienteReturnIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    
+    
+    <xs:element name="createdClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="createdClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+         
+    <xs:element name="modificarEstadoClienteBancaWebRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="modificarEstadoClienteBancaWebResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+     
+    
+    <xs:element name="eliminarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                 <xs:element name="tipoIdentificacion" type="xs:string"/>
+                <xs:element name="identificacion" type="xs:string"/>
+               
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="eliminarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    
+    <xs:complexType name="Cliente">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="tipoIdentificacion" type="xs:string"/>
+            <xs:element name="identificacion" type="xs:string"/>
+            <xs:element name="apellidoPaterno" type="xs:string"/>
+            <xs:element name="apellidoMaterno" type="xs:string"/>
+            <xs:element name="nombre1" type="xs:string"/>
+            <xs:element name="nombre2" type="xs:string"/>
+            <xs:element name="provincia" type="xs:string"/>
+            <xs:element name="canton" type="xs:string"/>
+            <xs:element name="parroquia" type="xs:string"/>
+            <xs:element name="direccion" type="xs:string"/>
+            <xs:element name="telefono" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="fechaNaciemiento" type="xs:date"/>
+            <xs:element name="estadoCivil" type="xs:string"/>
+            <xs:element name="estadoBancaWeb" type="xs:string"/>
+            <xs:element name="estado" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>
