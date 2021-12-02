@@ -20,6 +20,7 @@ import ec.edu.espe.arquisoft.cliente.wsdl.ModificarEstadoClienteBancaWebResponse
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Slf4j
 public class ClienteService extends WebServiceGatewaySupport {
 
-    private String endpoint = "http://localhost:8080/ws/cliente.wsdl";
+    @Value("${server.cliente.uri}/cliente.wsdl")
+    private String endpoint;
 
     public List<Cliente> getAll() {
         GetClienteRequest request = new GetClienteRequest();

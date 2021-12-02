@@ -15,6 +15,9 @@ import ec.edu.espe.arquisoft.cliente.service.ClienteService;
 import ec.edu.espe.arquisoft.cliente.wsdl.Cliente;
 import java.util.List;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +41,11 @@ public class ClienteController {
     }
 
     @GetMapping(value = "{id}")
+    @ApiOperation(value = "Obtiene un cliente", notes = "Obtiene un cliente de acuerdo a su ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK, Cuando encuentra un cliente de acuerdo a su ID enviada"),
+            @ApiResponse(code = 404, message = "No existe un cliente para su ID enviada")
+    })
     public ResponseEntity getClienteById(@PathVariable("id") String id) {
         String errorMessage = "Error de Busqueda.";
         try {
@@ -53,6 +61,11 @@ public class ClienteController {
     }
 
     @GetMapping
+    @ApiOperation(value = "Obtiene todos los clientes", notes = "Obtiene todos los clientes de la base de datos")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK,Cuando encuentra todos los clientes"),
+            @ApiResponse(code = 404, message = "No existen clientes")
+    })
     public ResponseEntity getAllClientes() {
         String errorMessage = "Error de Busqueda.";
         try {
@@ -69,6 +82,11 @@ public class ClienteController {
 
     
     @PostMapping(value = "return/")
+    @ApiOperation(value = "Crea un clienteID ", notes = "Crea un clienteID nuevo")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK, clienteID y registrada para proceso"),
+            @ApiResponse(code = 404, message = "Cliente ID recibido con errores")
+    })
     public ResponseEntity createClienteReturnId(@RequestBody Cliente cliente) {
         
         String errorMessage = "Error al crear CLiente.";
@@ -84,6 +102,11 @@ public class ClienteController {
     
     
     @PutMapping(value = "estadoBancaWeb/{id}")
+    @ApiOperation(value = "Modificar un cliente ", notes = "Modifica un cliente de acuerdo a su ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Cuando encuentra un cliente de acuerdo al ID enviado lo modifica"),
+            @ApiResponse(code = 404, message = "No existe un cliente para el ID enviado")
+    })
     public ResponseEntity modificarEstadoClienteBancaWeb(@PathVariable("id") String id) {
         String errorMessage = "Error al modificar estado de Cliente.";
         try {
@@ -99,7 +122,11 @@ public class ClienteController {
     }
     
      @PostMapping
-  
+     @ApiOperation(value = "Crea un Cliente", notes = "Crea un Cliente nuevo")
+     @ApiResponses(value = {
+             @ApiResponse(code = 200, message = "OK,Cliente recibido y registrado para proceso"),
+             @ApiResponse(code = 404, message = "Cliente recibido con errores")
+     })
     public ResponseEntity createCliente(@RequestBody Cliente cliente) {
         String errorMessage = "Error al crear CLiente.";
         try {
@@ -113,7 +140,11 @@ public class ClienteController {
         }
     }
       @DeleteMapping(value = "{tipoIdentificacion}/{identificacion}")
- 
+      @ApiOperation(value = "Eliminar Cliente ", notes = "Eliminar Cliente de acuerdo a su tipo de Identificacion e Identificacion")
+      @ApiResponses(value = {
+              @ApiResponse(code = 200, message = "OK, Cuando Eliminar Cliente de acuerdo a su tipo de Identificacion e Identificacion"),
+              @ApiResponse(code = 404, message = "No existe un cliente para la Identificaicon enviada por lo tanto no se puede elimnar")
+      })
     public ResponseEntity eliminarCliente(@PathVariable("tipoIdentificacion") String tipoIdentificacion,
             @PathVariable("identificacion") String identificacion) {
         String errorMessage = "Error al eliminar estado de Cliente.";
