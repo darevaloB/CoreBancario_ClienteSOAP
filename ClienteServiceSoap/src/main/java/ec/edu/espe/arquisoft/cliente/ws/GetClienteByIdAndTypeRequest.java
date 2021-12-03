@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "id"
+    "id", "tipoIdentificacion"
 })
 @XmlRootElement(name = "getClienteByIdAndTypeRequest")
 public class GetClienteByIdAndTypeRequest {
