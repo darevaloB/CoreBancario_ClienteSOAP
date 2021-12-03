@@ -85,6 +85,7 @@ public class ClienteEndPoint {
         try {
             CreatedClienteReturnIdResponse response = new CreatedClienteReturnIdResponse();
             response.setId(clienteId);
+            log.info("response: {}",response.getId());
             return response;
         } catch (Exception e) {
             log.error("{} ", e.getMessage(), e.getStackTrace());

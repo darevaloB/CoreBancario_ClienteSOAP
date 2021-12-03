@@ -130,8 +130,9 @@ public class ClienteController {
     public ResponseEntity createCliente(@RequestBody Cliente cliente) {
         String errorMessage = "Error al crear CLiente.";
         try {
-            this.service.createCliente(cliente);
-            return ResponseEntity.ok(cliente.getId());
+            Cliente response = new Cliente();
+            response = this.service.createCliente(cliente);
+            return ResponseEntity.ok(response.getId());
         } catch (Exception e) {
             GenericDetailSerializer errorResponse;
             errorResponse = new GenericDetailSerializer(
