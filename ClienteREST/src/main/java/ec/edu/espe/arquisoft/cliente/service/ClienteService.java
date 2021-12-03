@@ -4,21 +4,11 @@
  */
 package ec.edu.espe.arquisoft.cliente.service;
 
-import ec.edu.espe.arquisoft.cliente.wsdl.Cliente;
-import ec.edu.espe.arquisoft.cliente.wsdl.CreatedClienteRequest;
-import ec.edu.espe.arquisoft.cliente.wsdl.CreatedClienteResponse;
-import ec.edu.espe.arquisoft.cliente.wsdl.CreatedClienteReturnIdRequest;
-import ec.edu.espe.arquisoft.cliente.wsdl.CreatedClienteReturnIdResponse;
-import ec.edu.espe.arquisoft.cliente.wsdl.EliminarClienteRequest;
-import ec.edu.espe.arquisoft.cliente.wsdl.EliminarClienteResponse;
-import ec.edu.espe.arquisoft.cliente.wsdl.GetClienteByIdRequest;
-import ec.edu.espe.arquisoft.cliente.wsdl.GetClienteByIdResponse;
-import ec.edu.espe.arquisoft.cliente.wsdl.GetClienteRequest;
-import ec.edu.espe.arquisoft.cliente.wsdl.GetClienteResponse;
-import ec.edu.espe.arquisoft.cliente.wsdl.ModificarEstadoClienteBancaWebRequest;
-import ec.edu.espe.arquisoft.cliente.wsdl.ModificarEstadoClienteBancaWebResponse;
+import ec.edu.espe.arquisoft.cliente.wsdl.*;
+
 import java.util.List;
 import java.util.Optional;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -42,60 +32,72 @@ public class ClienteService extends WebServiceGatewaySupport {
 
         return response.getCliente();
     }
-    
-      public Cliente getClienteId(String id) {
-        GetClienteByIdRequest request= new GetClienteByIdRequest();
+
+    public Cliente getClienteId(String id) {
+        GetClienteByIdRequest request = new GetClienteByIdRequest();
         request.setId(id);
-        GetClienteByIdResponse response= 
-                (  GetClienteByIdResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
-        
+        GetClienteByIdResponse response =
+                (GetClienteByIdResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
+
         log.info("Respuesta obtenida de SOAP {} ", response.getCliente().toString());
-    
-        return response.getCliente();  
+
+        return response.getCliente();
     }
-      
-       public String createdClienteReturnId(Cliente clienteRQ) {
+    public Cliente getClienteIdAndTypeId(String typeId, String id) {
+        GetClienteByIdAndTypeRequest request = new GetClienteByIdAndTypeRequest();
+        request.setId(id);
+        request.setTipoIdentificacion(typeId);
+        GetClienteByIdAndTypeResponse response =
+                (GetClienteByIdAndTypeResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
+
+        log.info("Respuesta obtenida de SOAP {} ", response.getCliente().toString());
+
+        return response.getCliente();
+    }
+
+
+    public String createdClienteReturnId(Cliente clienteRQ) {
         CreatedClienteReturnIdRequest request = new CreatedClienteReturnIdRequest();
-         request.setCliente(clienteRQ);
-         CreatedClienteReturnIdResponse response= 
-                 (CreatedClienteReturnIdResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint,request);
-         return response.getId();
-        
+        request.setCliente(clienteRQ);
+        CreatedClienteReturnIdResponse response =
+                (CreatedClienteReturnIdResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
+        return response.getId();
+
     }
-       
-       
-       
-        public  void modificarEstadoClienteBancaWeb(String id) {
-            ModificarEstadoClienteBancaWebRequest request = new ModificarEstadoClienteBancaWebRequest();
-         request.setId(id);
-         ModificarEstadoClienteBancaWebResponse response= 
-                ( ModificarEstadoClienteBancaWebResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
-        
+
+
+    public void modificarEstadoClienteBancaWeb(String id) {
+        ModificarEstadoClienteBancaWebRequest request = new ModificarEstadoClienteBancaWebRequest();
+        request.setId(id);
+        ModificarEstadoClienteBancaWebResponse response =
+                (ModificarEstadoClienteBancaWebResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
+
         log.info("Respuesta obtenida de SOAP {} ", response.getCliente().toString());
-        
+
     }
-        public Cliente createCliente(Cliente cliente) {
-          CreatedClienteRequest request = new CreatedClienteRequest();
-         request.setCliente(cliente);
-         CreatedClienteResponse response= 
-                ( CreatedClienteResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
-        
+
+    public Cliente createCliente(Cliente cliente) {
+        CreatedClienteRequest request = new CreatedClienteRequest();
+        request.setCliente(cliente);
+        CreatedClienteResponse response =
+                (CreatedClienteResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
+
         log.info("Respuesta obtenida de SOAP {} ", response.getCliente().toString());
         return response.getCliente();
     }
-       
+
     public Cliente eliminarCliente(String tipoIdentificacion, String identificacion) {
-         EliminarClienteRequest request = new EliminarClienteRequest();
-         request.setTipoIdentificacion(tipoIdentificacion);
-         request.setIdentificacion(identificacion);
-         EliminarClienteResponse response= 
-                ( EliminarClienteResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
-        
+        EliminarClienteRequest request = new EliminarClienteRequest();
+        request.setTipoIdentificacion(tipoIdentificacion);
+        request.setIdentificacion(identificacion);
+        EliminarClienteResponse response =
+                (EliminarClienteResponse) getWebServiceTemplate().marshalSendAndReceive(endpoint, request);
+
         log.info("Respuesta obtenida de SOAP {} ", response.getCliente().toString());
         return response.getCliente();
 
-      
+
     }
-       
+
 
 }

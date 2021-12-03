@@ -159,6 +159,26 @@ public class ClienteController {
         }
     }
 
+    @GetMapping(value = "{tipoIdentificacion}/{identificacion}")
+    @ApiOperation(value = "Obtiene un cliente", notes = "Obtiene un cliente de acuerdo a su Tipo de Identificacion e Identificacion")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK, Cuando encuentra un cliente de acuerdo al Tipo de Identificacion e Identificacion enviada"),
+            @ApiResponse(code = 404, message = "No existe un cliente para Tipo de Identificacion e Identificacion enviada")
+    })
+    public ResponseEntity getCliente(@PathVariable("tipoIdentificacion") String tipoIdentificacion,
+                                     @PathVariable("identificacion") String identificacion) {
+        String errorMessage = "Error de Busqueda.";
+        try {
+            Cliente cliente = this.service.getClienteIdAndTypeId(tipoIdentificacion,identificacion);
+            return ResponseEntity.ok(cliente);
+        } catch (Exception e) {
+            GenericDetailSerializer errorResponse;
+            errorResponse = new GenericDetailSerializer(
+                    errorMessage, e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+
     
     
 }

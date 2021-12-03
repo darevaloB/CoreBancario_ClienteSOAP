@@ -139,5 +139,20 @@ public class ObjectFactory {
     public EliminarClienteResponse createEliminarClienteResponse() {
         return new EliminarClienteResponse();
     }
+    /**
+     * Create an instance of {@link GetClienteByIdAndTypeRequest }
+     *
+     */
+    public GetClienteByIdAndTypeRequest createGetClienteByIdAndTypeRequest() {
+        return new GetClienteByIdAndTypeRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetClienteByIdAndTypeResponse }
+     *
+     */
+    public GetClienteByIdAndTypeResponse createGetClienteByIdAndTypeResponse() {
+        return new GetClienteByIdAndTypeResponse();
+    }
 
 }

@@ -8,31 +8,16 @@ import ec.edu.espe.arquisoft.cliente.dto.GenericDetailSerializer;
 import ec.edu.espe.arquisoft.cliente.exception.CreateException;
 import ec.edu.espe.arquisoft.cliente.exception.UpdateException;
 import ec.edu.espe.arquisoft.cliente.service.ClienteService;
-import ec.edu.espe.arquisoft.cliente.ws.Cliente;
-import ec.edu.espe.arquisoft.cliente.ws.CreatedClienteRequest;
-import ec.edu.espe.arquisoft.cliente.ws.CreatedClienteResponse;
-import ec.edu.espe.arquisoft.cliente.ws.CreatedClienteReturnIdRequest;
-import ec.edu.espe.arquisoft.cliente.ws.CreatedClienteReturnIdResponse;
-import ec.edu.espe.arquisoft.cliente.ws.EliminarClienteRequest;
-import ec.edu.espe.arquisoft.cliente.ws.EliminarClienteResponse;
-import ec.edu.espe.arquisoft.cliente.ws.GetClienteByIdRequest;
-import ec.edu.espe.arquisoft.cliente.ws.GetClienteByIdResponse;
-import ec.edu.espe.arquisoft.cliente.ws.GetClienteRequest;
-import ec.edu.espe.arquisoft.cliente.ws.GetClienteResponse;
-import ec.edu.espe.arquisoft.cliente.ws.ModificarEstadoClienteBancaWebRequest;
-import ec.edu.espe.arquisoft.cliente.ws.ModificarEstadoClienteBancaWebResponse;
-import static java.lang.StrictMath.log;
-import java.util.ArrayList;
+import ec.edu.espe.arquisoft.cliente.ws.*;
+
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import static sun.security.krb5.KrbException.errorMessage;
 
 @Slf4j
 @Endpoint
@@ -56,6 +41,21 @@ public class ClienteEndPoint {
             return response;
 
         } else {
+            log.error("El cliente con el ID: {} no existe en la base de datos", request.getId());
+            throw new CreateException("Mensaje: " + "El cliente con ID:" + request.getId() + " no existe en la base de datos");
+        }
+
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getClienteByIdAndTypeRequest")
+    @ResponsePayload
+    public GetClienteByIdAndTypeResponse obtenerClienteId(@RequestPayload GetClienteByIdAndTypeRequest request) throws RuntimeException {
+        try{
+            Cliente cliente = this.service.getByTipoIdentificacionAndIdentifiacion(request.getTipoIdentificacion(),request.getId());
+            GetClienteByIdAndTypeResponse response = new GetClienteByIdAndTypeResponse();
+            response.setCliente(cliente);
+            return response;
+        } catch (Exception ex){
             log.error("El cliente con el ID: {} no existe en la base de datos", request.getId());
             throw new CreateException("Mensaje: " + "El cliente con ID:" + request.getId() + " no existe en la base de datos");
         }

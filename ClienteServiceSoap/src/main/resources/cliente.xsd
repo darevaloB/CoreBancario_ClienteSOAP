@@ -102,6 +102,23 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="getClienteByIdAndTypeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="identificacion" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getClienteByIdAndTypeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cliente" type="tns:Cliente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
  
     
     <xs:complexType name="Cliente">
