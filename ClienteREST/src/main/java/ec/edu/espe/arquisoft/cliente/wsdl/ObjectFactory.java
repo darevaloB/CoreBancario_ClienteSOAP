@@ -6,7 +6,7 @@
 //
 
 
-package ec.edu.espe.arquisoft.cliente.ws;
+package ec.edu.espe.arquisoft.cliente.wsdl;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -154,5 +154,4 @@ public class ObjectFactory {
     public GetClienteByIdAndTypeResponse createGetClienteByIdAndTypeResponse() {
         return new GetClienteByIdAndTypeResponse();
     }
-
 }
