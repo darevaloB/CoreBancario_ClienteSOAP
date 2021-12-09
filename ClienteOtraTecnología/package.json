@@ -1,0 +1,21 @@
+{
+  "name": "soap",
+  "version": "1.0.0",
+  "description": "app para consumir soap",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index"
+  },
+  "author": "JD",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.15",
+    "readline-sync": "^1.4.10",
+    "soap": "^0.43.0",
+    "strong-soap": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/readline-sync": "^1.4.4"
+  }
+}
